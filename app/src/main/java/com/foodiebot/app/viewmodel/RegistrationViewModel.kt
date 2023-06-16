@@ -10,14 +10,28 @@ class RegistrationViewModel : ViewModel() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    fun registerUser(name: String, email: String, password: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+    fun registerUser(
+        name: String,
+        email: String,
+        password: String,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
         // Validate user input
-        if (name.isBlank() || email.isBlank() || password.isBlank()) {
-            onFailure("Please fill in all fields")
+        if (!isNameValid(name)) {
+            onFailure("Invalid name. Name should be between 2 and 12 characters.")
             return
         }
 
-        // Perform additional validation (e.g., check password length and symbols)
+        if (!isEmailValid(email)) {
+            onFailure("Invalid email format.")
+            return
+        }
+
+        if (!isPasswordValid(password)) {
+            onFailure("Invalid password. Password should be between 6 and 18 characters.")
+            return
+        }
 
         // Create a new user with email and password
         viewModelScope.launch {
@@ -32,5 +46,18 @@ class RegistrationViewModel : ViewModel() {
                 onFailure(e.localizedMessage ?: "Registration failed")
             }
         }
+    }
+
+    private fun isNameValid(name: String): Boolean {
+        return name.length in 2..12
+    }
+
+    private fun isEmailValid(email: String): Boolean {
+        val emailRegex = Regex("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")
+        return email.matches(emailRegex)
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        return password.length in 6..18
     }
 }

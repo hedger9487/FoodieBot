@@ -15,11 +15,12 @@ import androidx.compose.ui.unit.dp
 import com.foodiebot.app.R
 import com.foodiebot.app.viewmodel.RegistrationViewModel
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegistrationScreen(
-    viewModel: RegistrationViewModel
+    viewModel: RegistrationViewModel,
+    onRegistrationSuccess: () -> Unit,
+    onRegistrationFailure: (String) -> Unit
 ) {
     val nameState = remember { mutableStateOf("") }
     val emailState = remember { mutableStateOf("") }
@@ -51,10 +52,10 @@ fun RegistrationScreen(
                     email = emailState.value,
                     password = passwordState.value,
                     onSuccess = {
-                        // Registration successful
+                        onRegistrationSuccess()
                     },
                     onFailure = { error ->
-                        // Registration failed, handle the error
+                        onRegistrationFailure(error)
                     }
                 )
             }
