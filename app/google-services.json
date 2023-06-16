@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "776218731015",
+    "firebase_url": "https://foodiebot-c603a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "foodiebot-c603a",
+    "storage_bucket": "foodiebot-c603a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776218731015:android:87f3924ece27c3f820c0a2",
+        "android_client_info": {
+          "package_name": "com.foodiebot.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776218731015-3bshi5v3rji94b5gmlq1dde9cvt7oa3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYo1L6ZaoZphEtMJ3Dqe0F_b490NvW1EU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776218731015-3bshi5v3rji94b5gmlq1dde9cvt7oa3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
