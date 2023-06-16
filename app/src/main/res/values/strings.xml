@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FoodieBot</string>
+    <string name="label_name">name</string>
+    <string name="label_email">email</string>
+    <string name="label_password">password</string>
+    <string name="btn_register">register</string>
 </resources>
