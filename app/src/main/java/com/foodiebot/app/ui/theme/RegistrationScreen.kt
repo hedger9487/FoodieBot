@@ -29,19 +29,19 @@ fun RegistrationScreen(
     Column(modifier = Modifier.padding(16.dp)) {
         TextField(
             value = nameState.value,
-            onValueChange = { nameState.value = it },
+            onValueChange = { nameState.value = it.trim() },
             label = { Text(text = stringResource(R.string.label_name)) },
             modifier = Modifier.padding(bottom = 8.dp)
         )
         TextField(
             value = emailState.value,
-            onValueChange = { emailState.value = it },
+            onValueChange = { emailState.value = it.trim() },
             label = { Text(text = stringResource(R.string.label_email)) },
             modifier = Modifier.padding(bottom = 8.dp)
         )
         TextField(
             value = passwordState.value,
-            onValueChange = { passwordState.value = it },
+            onValueChange = { passwordState.value = it.trim() },
             label = { Text(text = stringResource(R.string.label_password)) },
             modifier = Modifier.padding(bottom = 8.dp)
         )

@@ -19,7 +19,8 @@ fun LoginScreen(
     viewModel: LoginViewModel,
     onLoginSuccess: () -> Unit,
     onLoginFailure: (String) -> Unit,
-    onRegisterClick: () -> Unit
+    onRegisterClick: () -> Unit,
+    onGoogleSignIn: () -> Unit
 ) {
     val emailState = remember { mutableStateOf("") }
     val passwordState = remember { mutableStateOf("") }
@@ -27,12 +28,12 @@ fun LoginScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         TextField(
             value = emailState.value,
-            onValueChange = { emailState.value = it },
+            onValueChange = { emailState.value = it.trim() },
             label = { Text("Email") }
         )
         TextField(
             value = passwordState.value,
-            onValueChange = { passwordState.value = it },
+            onValueChange = { passwordState.value = it.trim() },
             label = { Text("Password") }
         )
         Button(
@@ -52,11 +53,16 @@ fun LoginScreen(
         ) {
             Text("Register")
         }
+        Button(
+            onClick = onGoogleSignIn
+        ) {
+            Text("Sign in with Google")
+        }
     }
 }
 
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen(LoginViewModel(), {}, {}, {})
+    LoginScreen(LoginViewModel(), {}, {}, {}, {})
 }

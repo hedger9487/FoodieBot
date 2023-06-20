@@ -4,4 +4,5 @@
     <string name="label_email">email</string>
     <string name="label_password">password</string>
     <string name="btn_register">register</string>
+    <string name="default_web_client_id">776218731015-1vp5e171kr4spe0svtosf5qupj9g8omr.apps.googleusercontent.com</string>>
 </resources>
