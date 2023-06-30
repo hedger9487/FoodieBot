@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.util.UUID
 
 class RegistrationViewModel : ViewModel() {
 
@@ -14,7 +15,7 @@ class RegistrationViewModel : ViewModel() {
         name: String,
         email: String,
         password: String,
-        onSuccess: () -> Unit,
+        onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     ) {
         // Validate user input
@@ -33,12 +34,15 @@ class RegistrationViewModel : ViewModel() {
             return
         }
 
+
+        val userId = UUID.randomUUID().toString()
+
         // Create a new user with email and password
         viewModelScope.launch {
             try {
                 val authResult = auth.createUserWithEmailAndPassword(email, password).await()
                 if (authResult.user != null) {
-                    onSuccess()
+                    onSuccess(userId)
                 } else {
                     onFailure("Registration failed")
                 }

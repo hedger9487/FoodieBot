@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.foodiebot.app.ui.theme.FoodieBotTheme
 import com.foodiebot.app.ui.theme.LoginScreen
 import com.foodiebot.app.ui.theme.RegistrationScreen
+import com.foodiebot.app.viewmodel.FoodPreferenceViewModel
 import com.foodiebot.app.viewmodel.LoginViewModel
 import com.foodiebot.app.viewmodel.RegistrationViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var foodPreferenceViewModel: FoodPreferenceViewModel
 
     private var isRegisterScreenVisible by mutableStateOf(false)
 
@@ -50,6 +52,9 @@ class MainActivity : ComponentActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         googleSignInClient = buildGoogleSignInClient()
+
+        // Create an instance of FoodPreferenceViewModel
+        foodPreferenceViewModel = ViewModelProvider(this)[FoodPreferenceViewModel::class.java]
 
         setContent {
             FoodieBotTheme {
@@ -69,7 +74,8 @@ class MainActivity : ComponentActivity() {
                             onRegistrationFailure = { error ->
                                 // Handle registration failure
                                 Toast.makeText(this@MainActivity, error, Toast.LENGTH_SHORT).show()
-                            }
+                            },
+                            foodPreferenceViewModel = foodPreferenceViewModel
                         )
                     } else {
                         LoginScreen(
@@ -113,7 +119,7 @@ class MainActivity : ComponentActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN && resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
